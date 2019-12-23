@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "jp.axer.CocoaInput.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "TextFieldMixin",
+    "AbstractButtonWidgetMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

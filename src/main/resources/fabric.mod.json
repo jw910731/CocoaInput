@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "cocoainput",
+  "version": "${version}",
+
+  "name": "Cocoa Input",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Axeryok",
+    "jw910731"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "jp.axer.CocoaInput.CocoaInput"
+    ]
+  },
+  "mixins": [
+    "cocoainput.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.2",
+    "fabric": "*",
+    "minecraft": "1.15.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

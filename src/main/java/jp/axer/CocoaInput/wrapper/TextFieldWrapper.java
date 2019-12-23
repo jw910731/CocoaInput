@@ -1,29 +1,35 @@
-
 package jp.axer.CocoaInput.wrapper;
 
 import jp.axer.CocoaInput.CocoaInput;
+import jp.axer.CocoaInput.plugin.AbstractButtonWidgetInterface;
 import jp.axer.CocoaInput.plugin.IMEOperator;
 import jp.axer.CocoaInput.plugin.IMEReceiver;
+import jp.axer.CocoaInput.plugin.TextFieldInterface;
 import jp.axer.CocoaInput.util.PreeditFormatter;
 import jp.axer.CocoaInput.util.Rect;
 import jp.axer.CocoaInput.util.Tuple3;
-import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.gui.widget.TextFieldWidget;
 
-public class GuiTextFieldWrapper implements IMEReceiver {
+public class TextFieldWrapper implements IMEReceiver {
     private IMEOperator myIME;
-    private GuiTextField owner;
+    private TextFieldWidget owner;
+    private TextFieldInterface ownerAdapter;
+    private AbstractButtonWidgetInterface ownerParentAdapter;
     private int length = 0;
     private boolean cursorVisible = true;
     private boolean preeditBegin = false;
-    private int originalCursorPosition = 0;//絶対的
+    private int originalCursorPosition = 0;
 
-    public GuiTextFieldWrapper(GuiTextField field) {
+    public TextFieldWrapper(TextFieldWidget field){
         owner = field;
+        ownerAdapter = (TextFieldInterface)field;
         myIME = CocoaInput.getController().generateIMEOperator(this);
     }
 
     public void setFocused(boolean newParam) {
-        if (newParam != owner.isFocused()) {
+        // TODO: Better implementation is to inject the method "onFocusChanged" (Anvil rename Bug)
+        boolean db = owner.isFocused();
+        if (newParam != db) {
             myIME.setFocused(newParam);
         }
     }
@@ -31,29 +37,27 @@ public class GuiTextFieldWrapper implements IMEReceiver {
     @Override
     public void insertText(String aString, int position1, int length1) {
         if (!preeditBegin) {
-            originalCursorPosition = owner.getCursorPosition();
+            originalCursorPosition = owner.getCursor();
         }
         preeditBegin = false;
         cursorVisible = true;
         if (aString.length() == 0) {
-            owner.text = (new StringBuffer(owner.getText())).replace(originalCursorPosition, originalCursorPosition + length, "").toString();
+            owner.setText((new StringBuffer(owner.getText())).replace(originalCursorPosition, originalCursorPosition + length, "").toString());
             length = 0;
-            owner.setCursorPosition(originalCursorPosition);
-            //owner.selectionEnd = owner.cursorPosition;
+            owner.setCursor(originalCursorPosition);
             return;
         }
-        owner.text = (new StringBuffer(owner.getText()))
+        owner.setText((new StringBuffer(owner.getText()))
                 .replace(originalCursorPosition, originalCursorPosition + length, aString.substring(0, aString.length()))
-                .toString();
+                .toString());
         length = 0;
-        owner.setCursorPosition(originalCursorPosition + aString.length());
-        //owner.selectionEnd = owner.cursorPosition;
+        owner.setCursor(originalCursorPosition + aString.length());
     }
 
     @Override
     public void setMarkedText(String aString, int position1, int length1, int position2, int length2) {
         if (!preeditBegin) {
-            originalCursorPosition = owner.getCursorPosition();
+            originalCursorPosition = owner.getCursor();
             preeditBegin = true;
         }
         Tuple3<String, Integer, Boolean> formattedText = PreeditFormatter.formatMarkedText(aString, position1, length1);
@@ -62,32 +66,23 @@ public class GuiTextFieldWrapper implements IMEReceiver {
         boolean hasCaret = formattedText._3();
         if (hasCaret) {
             this.cursorVisible = true;
-            owner.setCursorPosition(originalCursorPosition + caretPosition);
-            //owner.selectionEnd=owner.cursorPosition;
+            owner.setCursor(originalCursorPosition + caretPosition);
         } else {
             this.cursorVisible = false;
-            owner.cursorCounter = 6;
-            owner.setCursorPosition(originalCursorPosition);
-            //owner.selectionEnd=owner.cursorPosition;
+            ownerAdapter.setFocusedTicks(6);
+            owner.setCursor(originalCursorPosition);
         }
-        owner.text = (new StringBuffer(owner.getText())).replace(originalCursorPosition, originalCursorPosition + length, str).toString();
+        owner.setText((new StringBuffer(owner.getText())).replace(originalCursorPosition, originalCursorPosition + length, str).toString());
         length = str.length();
-    }
-
-    public void updateCursorCounter() {
-        if (cursorVisible) owner.cursorCounter++;
     }
 
     @Override
     public Rect getRect() {
         return new Rect(//{x,y}
-                (owner.fontRenderer.getStringWidth(owner.getText().substring(0, originalCursorPosition)) + (owner.enableBackgroundDrawing ? owner.x + 4 : owner.x)),
-                (owner.fontRenderer.FONT_HEIGHT + (owner.enableBackgroundDrawing ? owner.y + (owner.height - 8) / 2 : owner.y)),
-                owner.width,
-                owner.height
-
+                (ownerAdapter.getTextRenderer().getStringWidth(owner.getText().substring(0, originalCursorPosition)) + owner.x),
+                (ownerAdapter.getTextRenderer().fontHeight + owner.y),
+                owner.getWidth(),
+                ownerAdapter.getHeight()
         );
     }
-
-
 }
