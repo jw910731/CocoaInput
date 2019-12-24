@@ -8,7 +8,8 @@
     "TextFieldMixin",
     "AbstractButtonWidgetMixin",
     "BookEditScreenMixin",
-    "ScreenMixin"
+    "ScreenMixin",
+    "SignEditScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
