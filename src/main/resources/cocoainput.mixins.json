@@ -7,7 +7,8 @@
   "client": [
     "TextFieldMixin",
     "AbstractButtonWidgetMixin",
-    "BookEditScreenMixin"
+    "BookEditScreenMixin",
+    "ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
