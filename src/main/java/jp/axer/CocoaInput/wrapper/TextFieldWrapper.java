@@ -27,9 +27,7 @@ public class TextFieldWrapper implements IMEReceiver {
     }
 
     public void setFocused(boolean newParam) {
-        // TODO: Better implementation is to inject the method "onFocusChanged" (Anvil rename Bug)
-        boolean db = owner.isFocused();
-        if (newParam != db) {
+        if (newParam != myIME.getFocused()) {
             myIME.setFocused(newParam);
         }
     }

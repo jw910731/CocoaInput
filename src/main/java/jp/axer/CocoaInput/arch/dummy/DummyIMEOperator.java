@@ -18,4 +18,8 @@ public class DummyIMEOperator implements IMEOperator {
     public void removeInstance() {
     }
 
+    @Override
+    public boolean getFocused(){
+        return false;
+    }
 }

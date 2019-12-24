@@ -27,8 +27,12 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
 
     @Inject(at=@At("RETURN"), method="<init>*")
     protected void constructor(CallbackInfo cb){
-        System.out.println("TextField constructor invoked.");
         wrapper = new TextFieldWrapper((TextFieldWidget)(Object)this);
+    }
+
+    @Inject(method = "onFocusedChanged", at=@At("TAIL"))
+    protected void onFocusedChanged(boolean bl, CallbackInfo cb){
+        this.setFocused(bl);
     }
 
     /*

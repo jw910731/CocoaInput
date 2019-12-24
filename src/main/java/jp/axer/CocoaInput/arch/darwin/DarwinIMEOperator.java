@@ -19,9 +19,11 @@ public class DarwinIMEOperator implements IMEOperator {
     Func_insertText insertText_p;
     Func_setMarkedText setMarkedText_p;
     Func_firstRectForCharacterRange firstRectForCharacterRange_p;
+    private boolean focused;
 
     public DarwinIMEOperator(IMEReceiver field) {
         this.owner = field;
+        focused = false;
         uuid = UUID.randomUUID().toString();
         insertText_p = new Func_insertText() {
             @Override
@@ -76,6 +78,12 @@ public class DarwinIMEOperator implements IMEOperator {
     }
 
     public void setFocused(boolean yn) {
+        focused = yn;
         Handle.INSTANCE.setIfReceiveEvent(uuid, yn == true ? 1 : 0);
+    }
+
+    @Override
+    public boolean getFocused() {
+        return focused;
     }
 }
