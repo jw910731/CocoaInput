@@ -1,7 +1,7 @@
 package jp.axer.CocoaInput.mixin;
 
-import jp.axer.CocoaInput.plugin.AbstractButtonWidgetInterface;
-import jp.axer.CocoaInput.plugin.TextFieldInterface;
+import jp.axer.CocoaInput.adapters.AbstractButtonWidgetInterface;
+import jp.axer.CocoaInput.adapters.TextFieldInterface;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,10 +1,10 @@
 package jp.axer.CocoaInput.wrapper;
 
 import jp.axer.CocoaInput.CocoaInput;
-import jp.axer.CocoaInput.plugin.AbstractButtonWidgetInterface;
+import jp.axer.CocoaInput.adapters.AbstractButtonWidgetInterface;
 import jp.axer.CocoaInput.plugin.IMEOperator;
 import jp.axer.CocoaInput.plugin.IMEReceiver;
-import jp.axer.CocoaInput.plugin.TextFieldInterface;
+import jp.axer.CocoaInput.adapters.TextFieldInterface;
 import jp.axer.CocoaInput.util.PreeditFormatter;
 import jp.axer.CocoaInput.util.Rect;
 import jp.axer.CocoaInput.util.Tuple3;

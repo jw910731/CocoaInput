@@ -1,6 +1,6 @@
 package jp.axer.CocoaInput.mixin;
 
-import jp.axer.CocoaInput.plugin.TextFieldInterface;
+import jp.axer.CocoaInput.adapters.TextFieldInterface;
 import jp.axer.CocoaInput.wrapper.TextFieldWrapper;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;

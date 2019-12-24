@@ -4,15 +4,13 @@ import java.util.List;
 
 
 import jp.axer.CocoaInput.CocoaInput;
-import jp.axer.CocoaInput.plugin.BookEditScreenInterface;
+import jp.axer.CocoaInput.adapters.BookEditScreenInterface;
 import jp.axer.CocoaInput.plugin.IMEOperator;
 import jp.axer.CocoaInput.plugin.IMEReceiver;
 import jp.axer.CocoaInput.util.PreeditFormatter;
 import jp.axer.CocoaInput.util.Rect;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
-
-import javax.xml.soap.Text;
 
 public class BookEditScreenWrapper implements IMEReceiver {
     private IMEOperator myIME;
@@ -68,12 +66,6 @@ public class BookEditScreenWrapper implements IMEReceiver {
 
     @Override
     public Rect getRect() {
-        /*TextRenderer fontRendererObj = null;
-        try {
-            fontRendererObj = WrapperUtil.makeFontRenderer(owner);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
         TextRenderer font = ownerAdapter.getFont();
         if (ownerAdapter.getSigning()) {
             return new Rect(

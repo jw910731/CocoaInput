@@ -1,4 +1,4 @@
-package jp.axer.CocoaInput.plugin;
+package jp.axer.CocoaInput.adapters;
 
 public interface AbstractButtonWidgetInterface {
     public int getHeight();

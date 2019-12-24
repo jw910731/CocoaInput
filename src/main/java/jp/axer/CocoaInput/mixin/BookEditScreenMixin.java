@@ -1,6 +1,6 @@
 package jp.axer.CocoaInput.mixin;
 
-import jp.axer.CocoaInput.plugin.BookEditScreenInterface;
+import jp.axer.CocoaInput.adapters.BookEditScreenInterface;
 import jp.axer.CocoaInput.wrapper.BookEditScreenWrapper;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
