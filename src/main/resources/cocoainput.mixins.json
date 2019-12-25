@@ -9,7 +9,8 @@
     "AbstractButtonWidgetMixin",
     "BookEditScreenMixin",
     "ScreenMixin",
-    "SignEditScreenMixin"
+    "SignEditScreenMixin",
+    "MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

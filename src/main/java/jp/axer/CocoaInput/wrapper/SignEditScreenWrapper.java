@@ -7,7 +7,6 @@ import jp.axer.CocoaInput.plugin.IMEReceiver;
 import jp.axer.CocoaInput.util.PreeditFormatter;
 import jp.axer.CocoaInput.util.Rect;
 import net.minecraft.block.AbstractSignBlock;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 import net.minecraft.text.LiteralText;

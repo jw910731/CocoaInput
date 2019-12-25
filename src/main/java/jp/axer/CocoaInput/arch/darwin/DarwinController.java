@@ -19,12 +19,4 @@ public class DarwinController implements CocoaInputController {
     public IMEOperator generateIMEOperator(IMEReceiver ime) {
         return new DarwinIMEOperator(ime);
     }
-
-    // TODO: find alternative implementation for this forge event listener
-    /*@SubscribeEvent
-    public void didChangeGui(GuiOpenEvent event) {
-        if (!(event.getGui() instanceof IMEReceiver)) {
-            Handle.INSTANCE.refreshInstance();//GUIの切り替えでIMの使用をoffにする
-        }
-    }*/
 }
