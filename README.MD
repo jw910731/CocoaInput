@@ -12,6 +12,7 @@ Jars will be located in "build/libs".
 ## Installing
 CocoaInput was distributed on http://forum.minecraftuser.jp/viewtopic.php?f=13&t=24394.
 Before noticing the original owner of this project, there won't be any available distribution.
+
 Compile the code on your own to get the mod jar file.
 Place it in your mods directory and it should work.
 
