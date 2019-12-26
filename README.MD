@@ -10,12 +10,12 @@ gradle build
 Jars will be located in "build/libs".
 
 ## Installing
-CocoaInput has been distributed on http://forum.minecraftuser.jp/viewtopic.php?f=13&t=24394.
-Get jar from above URL or trying ”Compiling" task.
+CocoaInput was distributed on http://forum.minecraftuser.jp/viewtopic.php?f=13&t=24394.
+Before noticing the original owner of this project, there won't be any available distribution.
+Compile the code on your own to get the mod jar file.
+Place it in your mods directory and it should work.
 
-Place it in your mods directory.
-
-CocoaInput requires MinecraftForge.
+CocoaInput requires MinecraftFabric.
 This mod uses Java Native Access (Apache Licence2)
 
 ## License
