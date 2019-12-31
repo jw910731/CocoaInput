@@ -22,17 +22,17 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
     @Shadow
     private TextRenderer textRenderer;
 
-    @Shadow
-    public abstract int getCursor();
+    @Shadow(prefix = "shadow$")
+    public abstract int shadow$getCursor();
 
-    @Shadow
-    public abstract void setText(String s);
+    @Shadow(prefix = "shadow$")
+    public abstract void shadow$setText(String s);
 
-    @Shadow
-    public abstract void setCursor(int c);
+    @Shadow(prefix = "shadow$")
+    public abstract void shadow$setCursor(int c);
 
-    @Shadow
-    public abstract String getText();
+    @Shadow(prefix = "shadow$")
+    public abstract String shadow$getText();
 
 
     private TextFieldMixin(int x, int y, String text) {
@@ -72,5 +72,25 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
                 this.getWidth(),
                 this.getHeight()
         );
+    }
+
+    @Override
+    public int getCursor(){
+        return shadow$getCursor();
+    }
+
+    @Override
+    public void setText(String s){
+        shadow$setText(s);
+    }
+
+    @Override
+    public void setCursor(int c){
+        shadow$setCursor(c);
+    }
+
+    @Override
+    public String getText(){
+        return shadow$getText();
     }
 }
