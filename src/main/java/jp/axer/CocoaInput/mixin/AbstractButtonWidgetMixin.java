@@ -18,7 +18,7 @@ public abstract class AbstractButtonWidgetMixin extends DrawableHelper implement
     @Inject(method="setFocused", at=@At("HEAD"))
     private void setFocused(boolean bl, CallbackInfo cb){
         if(this instanceof TextFieldInterface){
-            ((TextFieldInterface)this).setFocused(bl);
+            ((TextFieldInterface)this).setFocus(bl);
         }
     }
 

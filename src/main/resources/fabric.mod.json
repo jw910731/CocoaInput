@@ -24,7 +24,8 @@
     ]
   },
   "mixins": [
-    "cocoainput.mixins.json"
+    "cocoainput.mixins.json",
+    "cocoa.rei.mixins.json"
   ],
 
   "depends": {

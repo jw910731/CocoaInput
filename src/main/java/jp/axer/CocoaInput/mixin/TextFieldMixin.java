@@ -40,7 +40,8 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
      * mainly called by superclass
      */
     @Override
-    public void setFocused(boolean bl){
+    public void setFocus(boolean bl){
+        System.out.println("SetFocus Invoked!!");
         wrapper.setFocused(bl);
     }
 
