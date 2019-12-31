@@ -5,12 +5,12 @@
   "mixins": [
   ],
   "client": [
-    "TextFieldMixin",
     "AbstractButtonWidgetMixin",
     "BookEditScreenMixin",
+    "MinecraftClientMixin",
     "ScreenMixin",
     "SignEditScreenMixin",
-    "MinecraftClientMixin"
+    "TextFieldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

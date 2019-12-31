@@ -1,9 +1,15 @@
 package jp.axer.CocoaInput.adapters;
 
+import jp.axer.CocoaInput.util.Rect;
 import net.minecraft.client.font.TextRenderer;
 
 public interface TextFieldInterface extends AbstractButtonWidgetInterface{
-    public void setFocusedTicks(int ft);
-    public void setFocus(boolean bl);
-    public TextRenderer getTextRenderer();
+    void setFocusedTicks(int ft);
+    void setFocus(boolean bl);
+    TextRenderer getTextRenderer();
+    int getCursor();
+    void setText(String s);
+    void setCursor(int c);
+    String getText();
+    Rect getRect(int originalCursorPosition);
 }

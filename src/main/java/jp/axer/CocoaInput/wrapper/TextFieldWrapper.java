@@ -12,17 +12,14 @@ import net.minecraft.client.gui.widget.TextFieldWidget;
 
 public class TextFieldWrapper implements IMEReceiver {
     private IMEOperator myIME;
-    private TextFieldWidget owner;
-    private TextFieldInterface ownerAdapter;
-    private AbstractButtonWidgetInterface ownerParentAdapter;
+    private TextFieldInterface owner;
     private int length = 0;
     private boolean cursorVisible = true;
     private boolean preeditBegin = false;
     private int originalCursorPosition = 0;
 
-    public TextFieldWrapper(TextFieldWidget field){
+    public TextFieldWrapper(TextFieldInterface field){
         owner = field;
-        ownerAdapter = (TextFieldInterface)field;
         myIME = CocoaInput.getController().generateIMEOperator(this);
     }
 
@@ -67,7 +64,7 @@ public class TextFieldWrapper implements IMEReceiver {
             owner.setCursor(originalCursorPosition + caretPosition);
         } else {
             this.cursorVisible = false;
-            ownerAdapter.setFocusedTicks(6);
+            owner.setFocusedTicks(6);
             owner.setCursor(originalCursorPosition);
         }
         owner.setText((new StringBuffer(owner.getText())).replace(originalCursorPosition, originalCursorPosition + length, str).toString());
@@ -76,11 +73,6 @@ public class TextFieldWrapper implements IMEReceiver {
 
     @Override
     public Rect getRect() {
-        return new Rect(//{x,y}
-                (ownerAdapter.getTextRenderer().getStringWidth(owner.getText().substring(0, originalCursorPosition)) + owner.x),
-                (ownerAdapter.getTextRenderer().fontHeight + owner.y),
-                owner.getWidth(),
-                ownerAdapter.getHeight()
-        );
+        return owner.getRect(originalCursorPosition);
     }
 }

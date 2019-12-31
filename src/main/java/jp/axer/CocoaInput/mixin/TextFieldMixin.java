@@ -1,6 +1,7 @@
 package jp.axer.CocoaInput.mixin;
 
 import jp.axer.CocoaInput.adapters.TextFieldInterface;
+import jp.axer.CocoaInput.util.Rect;
 import jp.axer.CocoaInput.wrapper.TextFieldWrapper;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
@@ -21,13 +22,26 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
     @Shadow
     private TextRenderer textRenderer;
 
+    @Shadow
+    public abstract int getCursor();
+
+    @Shadow
+    public abstract void setText(String s);
+
+    @Shadow
+    public abstract void setCursor(int c);
+
+    @Shadow
+    public abstract String getText();
+
+
     private TextFieldMixin(int x, int y, String text) {
         super(x, y, text);
     }
 
     @Inject(at=@At("RETURN"), method="<init>*")
     protected void constructor(CallbackInfo cb){
-        wrapper = new TextFieldWrapper((TextFieldWidget)(Object)this);
+        wrapper = new TextFieldWrapper((TextFieldInterface) this);
     }
 
     @Inject(method = "onFocusedChanged", at=@At("TAIL"))
@@ -35,13 +49,8 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
         this.setFocused(bl);
     }
 
-    /*
-     * implemented TextFieldInterface
-     * mainly called by superclass
-     */
     @Override
     public void setFocus(boolean bl){
-        System.out.println("SetFocus Invoked!!");
         wrapper.setFocused(bl);
     }
 
@@ -53,5 +62,15 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
     @Override
     public void setFocusedTicks(int ft) {
         this.focusedTicks = ft;
+    }
+
+    @Override
+    public Rect getRect(int originalCursorPosition){
+        return new Rect(//{x,y}
+                (this.getTextRenderer().getStringWidth(this.getText().substring(0, originalCursorPosition)) + this.x),
+                (this.getTextRenderer().fontHeight + this.y),
+                this.getWidth(),
+                this.getHeight()
+        );
     }
 }
