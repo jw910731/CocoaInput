@@ -5,6 +5,7 @@ import jp.axer.CocoaInput.adapters.AbstractButtonWidgetInterface;
 import jp.axer.CocoaInput.plugin.IMEOperator;
 import jp.axer.CocoaInput.plugin.IMEReceiver;
 import jp.axer.CocoaInput.adapters.TextFieldInterface;
+import jp.axer.CocoaInput.util.ModLogger;
 import jp.axer.CocoaInput.util.PreeditFormatter;
 import jp.axer.CocoaInput.util.Rect;
 import jp.axer.CocoaInput.util.Tuple3;
@@ -25,6 +26,7 @@ public class TextFieldWrapper implements IMEReceiver {
 
     public void setFocused(boolean newParam) {
         if (newParam != myIME.getFocused()) {
+            ModLogger.debug("SetFocused Invoked");
             myIME.setFocused(newParam);
         }
     }
@@ -32,27 +34,27 @@ public class TextFieldWrapper implements IMEReceiver {
     @Override
     public void insertText(String aString, int position1, int length1) {
         if (!preeditBegin) {
-            originalCursorPosition = owner.getCursor();
+            originalCursorPosition = owner.$getCursor();
         }
         preeditBegin = false;
         cursorVisible = true;
         if (aString.length() == 0) {
-            owner.setText((new StringBuffer(owner.getText())).replace(originalCursorPosition, originalCursorPosition + length, "").toString());
+            owner.$setText((new StringBuffer(owner.$getText())).replace(originalCursorPosition, originalCursorPosition + length, "").toString());
             length = 0;
-            owner.setCursor(originalCursorPosition);
+            owner.$setCursor(originalCursorPosition);
             return;
         }
-        owner.setText((new StringBuffer(owner.getText()))
+        owner.$setText((new StringBuffer(owner.$getText()))
                 .replace(originalCursorPosition, originalCursorPosition + length, aString.substring(0, aString.length()))
                 .toString());
         length = 0;
-        owner.setCursor(originalCursorPosition + aString.length());
+        owner.$setCursor(originalCursorPosition + aString.length());
     }
 
     @Override
     public void setMarkedText(String aString, int position1, int length1, int position2, int length2) {
         if (!preeditBegin) {
-            originalCursorPosition = owner.getCursor();
+            originalCursorPosition = owner.$getCursor();
             preeditBegin = true;
         }
         Tuple3<String, Integer, Boolean> formattedText = PreeditFormatter.formatMarkedText(aString, position1, length1);
@@ -61,13 +63,13 @@ public class TextFieldWrapper implements IMEReceiver {
         boolean hasCaret = formattedText._3();
         if (hasCaret) {
             this.cursorVisible = true;
-            owner.setCursor(originalCursorPosition + caretPosition);
+            owner.$setCursor(originalCursorPosition + caretPosition);
         } else {
             this.cursorVisible = false;
             owner.setFocusedTicks(6);
-            owner.setCursor(originalCursorPosition);
+            owner.$setCursor(originalCursorPosition);
         }
-        owner.setText((new StringBuffer(owner.getText())).replace(originalCursorPosition, originalCursorPosition + length, str).toString());
+        owner.$setText((new StringBuffer(owner.$getText())).replace(originalCursorPosition, originalCursorPosition + length, str).toString());
         length = str.length();
     }
 

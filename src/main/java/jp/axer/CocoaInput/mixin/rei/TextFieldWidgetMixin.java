@@ -1,6 +1,7 @@
 package jp.axer.CocoaInput.mixin.rei;
 
 import jp.axer.CocoaInput.adapters.TextFieldInterface;
+import jp.axer.CocoaInput.adapters.rei.TextFieldWidgetInterface;
 import jp.axer.CocoaInput.util.Rect;
 import jp.axer.CocoaInput.wrapper.TextFieldWrapper;
 import me.shedaniel.math.api.Rectangle;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = TextFieldWidget.class, remap = false)
-public abstract class TextFieldWidgetMixin extends WidgetWithBounds implements TextFieldInterface {
+public abstract class TextFieldWidgetMixin extends WidgetWithBounds implements TextFieldInterface, TextFieldWidgetInterface {
 
     TextFieldWrapper wrapper;
 
@@ -22,12 +23,19 @@ public abstract class TextFieldWidgetMixin extends WidgetWithBounds implements T
     private int focusedTicks;
 
     @Shadow
-    public abstract Rectangle getBounds();
+    public abstract int getCursor();
 
-    @Inject(at=@At("RETURN"), method="<init>*")
-    protected void constructor(CallbackInfo cb){
-        wrapper = new TextFieldWrapper((TextFieldInterface) (Object)this);
-    }
+    @Shadow
+    public abstract void setText(String s);
+
+    @Shadow
+    public abstract void setCursor(int c);
+
+    @Shadow
+    public abstract String getText();
+
+    @Shadow
+    public abstract Rectangle getBounds();
 
     @Override
     public void setFocusedTicks(int ft){
@@ -58,5 +66,29 @@ public abstract class TextFieldWidgetMixin extends WidgetWithBounds implements T
     public Rect getRect(int originalCursorPosition){
         Rectangle bound = this.getBounds();
         return new Rect(bound.x, bound.y, bound.width, bound.height);
+    }
+    @Override
+    public int $getCursor(){
+        return this.getCursor();
+    }
+
+    @Override
+    public void $setText(String s){
+        this.setText(s);
+    }
+
+    @Override
+    public void $setCursor(int c){
+        this.setCursor(c);
+    }
+
+    @Override
+    public String $getText(){
+        return this.getText();
+    }
+
+    @Override
+    public void initWrapper(){
+        wrapper = new TextFieldWrapper((TextFieldInterface)(Object)this);
     }
 }

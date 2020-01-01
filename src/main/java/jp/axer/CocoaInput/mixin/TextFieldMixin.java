@@ -67,7 +67,7 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
     @Override
     public Rect getRect(int originalCursorPosition){
         return new Rect(//{x,y}
-                (this.getTextRenderer().getStringWidth(this.getText().substring(0, originalCursorPosition)) + this.x),
+                (this.getTextRenderer().getStringWidth(this.shadow$getText().substring(0, originalCursorPosition)) + this.x),
                 (this.getTextRenderer().fontHeight + this.y),
                 this.getWidth(),
                 this.getHeight()
@@ -75,22 +75,22 @@ public abstract class TextFieldMixin extends AbstractButtonWidget implements Tex
     }
 
     @Override
-    public int getCursor(){
+    public int $getCursor(){
         return shadow$getCursor();
     }
 
     @Override
-    public void setText(String s){
+    public void $setText(String s){
         shadow$setText(s);
     }
 
     @Override
-    public void setCursor(int c){
+    public void $setCursor(int c){
         shadow$setCursor(c);
     }
 
     @Override
-    public String getText(){
+    public String $getText(){
         return shadow$getText();
     }
 }

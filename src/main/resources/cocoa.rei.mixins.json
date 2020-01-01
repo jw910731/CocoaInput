@@ -5,7 +5,8 @@
   "mixins": [
   ],
   "client": [
-    "TextFieldWidgetMixin"
+    "TextFieldWidgetMixin",
+    "ContainerScreenOverlayMixin"
   ],
   "injectors": {
     "defaultRequire": 1

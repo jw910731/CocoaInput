@@ -7,9 +7,9 @@ public interface TextFieldInterface extends AbstractButtonWidgetInterface{
     void setFocusedTicks(int ft);
     void setFocus(boolean bl);
     TextRenderer getTextRenderer();
-    int getCursor();
-    void setText(String s);
-    void setCursor(int c);
-    String getText();
+    int $getCursor();
+    void $setText(String s);
+    void $setCursor(int c);
+    String $getText();
     Rect getRect(int originalCursorPosition);
 }
