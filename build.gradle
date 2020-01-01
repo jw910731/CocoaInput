@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 plugins {
 	id 'fabric-loom' version '0.2.6-SNAPSHOT'
 	id 'maven-publish'
@@ -59,6 +61,11 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 jar {
 	from "LICENSE"
+	if(Os.isFamily(Os.FAMILY_MAC)){
+		String cm = "bash ./build_lib_for_mac.sh"
+		Process p = cm.execute()
+		p.waitFor()
+	}
 }
 
 // configure the maven publication
